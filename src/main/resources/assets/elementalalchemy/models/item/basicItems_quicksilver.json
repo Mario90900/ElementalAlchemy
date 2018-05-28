@@ -1,0 +1,6 @@
+{
+    "parent":"elementalalchemy:item/standardItem",
+    "textures": {
+        "layer0":"elementalalchemy:items/quicksilver"
+    }
+}

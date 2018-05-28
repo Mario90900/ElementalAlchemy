@@ -1,0 +1,119 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'maven'
+
+// More user properties
+ext.user = parseConfig(file('extra.properties'))
+if (ext.user != null) {
+    ext.user.each { k, v ->
+        project.ext.set(k, v)
+    }
+}
+
+// parse and import external config
+def parseConfig(File config) {
+    if (!config.exists())
+        return null
+
+    config.withReader {
+        def prop = new Properties()
+        prop.load(it)
+        return (new ConfigSlurper().parse(prop))
+    }
+}
+
+repositories {
+    maven { // The repo from which to get waila
+        name "Mobius Repo"
+        url "https://tehnut.info/maven"
+        //url "http://mobiusstrip.eu/maven"
+    }
+    maven { // JEI
+        url "http://dvs1.progwml6.com/files/maven"
+    }
+    maven { // TOP
+        name 'tterrag maven'
+        url "https://maven.tterrag.com/"
+    }
+	maven {
+        name = "CoFH Maven"
+        url = "http://maven.covers1624.net"
+    }
+	maven {
+        url = "https://minecraft.curseforge.com/api/maven/"
+    }
+}
+
+version = "1.12.2-0.0.1"
+group= "com.mario90900.elementalalchemy" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "elementalalchemy"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+minecraft {
+    version = "${minecraft_version}-${forge_version}"
+    runDir = "run"
+    mappings = mcp_mappings
+    useDepAts = true
+}
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'dev'
+}
+
+artifacts {
+    archives sourceJar
+    archives deobfJar
+}
+
+dependencies {
+    deobfCompile "mezz.jei:jei_${jei_version}"
+    deobfCompile "mcp.mobius.waila:Hwyla:${waila_version}"
+    deobfCompile "mcjty.theoneprobe:TheOneProbe-${top_version}"
+
+	compile project(':LizardLib')
+}
+
+jar {
+    manifest {
+        //attributes 'FMLAT': 'deepresonance_at.cfg'
+    }
+}
+
+processResources
+{
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        // replace version and mcversion
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    // copy everything else, except the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}

@@ -1,0 +1,16 @@
+[
+{
+  "modid": "elementalalchemy",
+  "name": "Elemental Alchemy",
+  "description": "Manipulate and study the base elements of the world.",
+  "version": "Alpha-1.0",
+  "mcversion": "1.8.9",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Mario90900"],
+  "credits": "Mario90900 - Programming",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

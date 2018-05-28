@@ -1,0 +1,15 @@
+# English Language file for Elemental Alchemy
+# Items
+item.elementalalchemy:basicItems.salt.name=Salt
+item.elementalalchemy:basicItems.sulfur.name=Sulfur
+item.elementalalchemy:basicItems.quicksilver.name=Quicksilver
+item.elementalalchemy:basicItems.crystalFragment.name=Crystal Fragment
+
+# Blocks
+tile.elementalalchemy:rifts.fire.name=Elemental Rift of Fire
+tile.elementalalchemy:rifts.water.name=Elemental Rift of Water
+tile.elementalalchemy:rifts.air.name=Elemental Rift of Air
+tile.elementalalchemy:rifts.earth.name=Elemental Rift of Earth
+
+# Creative Tabs
+itemGroup.elementalalchemy=Elemental Alchemy

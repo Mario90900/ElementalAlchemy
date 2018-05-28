@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "variant=saltOre": { "model":"elementalalchemy:ores_saltOre" },
+        "variant=sulfurOre": { "model":"elementalalchemy:ores_sulfurOre" },
+		"variant=quicksilverOre": { "model":"elementalalchemy:ores_quicksilverOre" },
+		"variant=crystalOre": { "model":"elementalalchemy:ores_crystalOre" }
+    }
+}
